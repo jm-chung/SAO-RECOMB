@@ -1,6 +1,6 @@
 # Patent SAO Link Prediction
 
-A reproducible Python pipeline refactored from exploratory notebooks. It starts with a public `total_pat.csv` file and runs:
+Code structure:
 
 1. SAO (Subject–Action–Object) extraction with Stanford CoreNLP OpenIE
 2. PatentSBERTa embedding, UMAP reduction, and HDBSCAN clustering
