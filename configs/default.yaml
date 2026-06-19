@@ -1,0 +1,70 @@
+project:
+  seed: 42
+
+paths:
+  input_csv: data/raw/total_pat.csv
+  triples_pkl: data/interim/triples.pkl
+  clustered_triples_pkl: data/processed/clustered_triples.pkl
+  cluster_labels_pkl: data/processed/cluster_labels_top3.pkl
+  dataset_pkl: data/processed/dataset_1_3.pkl
+  model_path: models/SAO_BC_best.pt
+  metrics_json: outputs/test_metrics.json
+  predictions_csv: outputs/test_predictions.csv
+  pr_curve_png: outputs/pr_curve.png
+
+extraction:
+  batch_size: 1000
+  min_confidence: 0.8
+  timeout_ms: 120000
+  client_timeout_ms: 3600000
+  memory: 8G
+
+clustering:
+  model_name: AI-Growth-Lab/PatentSBERTa
+  fit_start_year: 2010
+  fit_end_year: 2019
+  predict_start_year: 2020
+  predict_end_year: 2021
+  n_neighbors: 5
+  n_components: 10
+  min_dist: 0.1
+  min_cluster_size: 5
+  min_samples: 1
+  label_top_k: 3
+  encode_batch_size: 128
+
+
+dataset:
+  periods: 5
+  input_year_count: 4
+  output_year_count: 2
+  negative_ratio: 3
+
+training:
+  model_name: roberta-base
+  test_size: 0.2
+  validation_fraction_of_train: 0.25
+  batch_size: 64
+  num_workers: 0
+  max_tokens: 256
+  learning_rate: 0.00005
+  weight_decay: 0.0001
+  structural_only_epochs: 10
+  joint_epochs: 20
+  warmup_ratio: 0.1
+  patience: 5
+  min_delta: 0.0001
+  gradient_accumulation_steps: 1
+  dropout: 0.1
+  alpha_initial: 0.5
+  focal_alpha: 0.75
+  focal_gamma: 2.0
+  embedding_dim: 512
+  conv_out_channels: 64
+  conv_kernel_size: 7
+  conv_height: 32
+  fc_hidden: 1024
+  input_dropout: 0.2
+  feature_dropout: 0.2
+  hidden_dropout: 0.3
+  threshold: auto
